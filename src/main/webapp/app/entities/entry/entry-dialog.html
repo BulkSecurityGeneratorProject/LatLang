@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEntryLabel">Create or edit a Entry</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.entry.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.entry.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_address">Address</label>
+            <input type="text" class="form-control" name="address" id="field_address"
+                    ng-model="vm.entry.address"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="vm.entry.city"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                    ng-model="vm.entry.country"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="adobeLatLangApp.entry.postal_code" for="field_postal_code">Postal Code</label>
+            <input type="text" class="form-control" name="postal_code" id="field_postal_code"
+                    ng-model="vm.entry.postal_code"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="adobeLatLangApp.entry.state_province" for="field_state_province">State Province</label>
+            <input type="text" class="form-control" name="state_province" id="field_state_province"
+                    ng-model="vm.entry.state_province"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_country1">Country 1</label>
+            <input type="text" class="form-control" name="country1" id="field_country1"
+                    ng-model="vm.entry.country1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="adobeLatLangApp.entry.google_verified_address" for="field_google_verified_address">Google Verified Address</label>
+            <input type="text" class="form-control" name="google_verified_address" id="field_google_verified_address"
+                    ng-model="vm.entry.google_verified_address"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_latitude">Latitude</label>
+            <input type="text" class="form-control" name="latitude" id="field_latitude"
+                    ng-model="vm.entry.latitude"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_longitude">Longitude</label>
+            <input type="text" class="form-control" name="longitude" id="field_longitude"
+                    ng-model="vm.entry.longitude"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,99 @@
+<div>
+    <h4>   Process google spreadsheet</h4>
+    <br/>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+        	<div class="col-xs-9 no-padding-right">
+  				<input type="text" class="form-control" ng-model="vm.urlFull" id="url" placeholder="Enter spreadsheet url">
+  			</div>
+            <div class="col-xs-3 no-padding-right" >
+                <button class="btn btn-primary" ng-click="vm.processUrl()" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Process
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+    <h4>   Upload spreadsheet</h4>
+    <br/>	
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    <div class="container-fluid">
+    
+	<input type="file" ng-nodel="vm.myFile">
+    <br>
+    	<div class="col-xs-3 no-padding-right">
+                <button class="btn btn-primary" ng-click="vm.processUpload()" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Process
+                    </span>
+                </button>
+           </div>
+         </div>
+        </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="city"><span>City</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="country"><span>Country</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="postal_code"><span translate="adobeLatLangApp.entry.postal_code">Postal Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="state_province"><span translate="adobeLatLangApp.entry.state_province">State Province</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="country1"><span>Country 1</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="google_verified_address"><span translate="adobeLatLangApp.entry.google_verified_address">Google Verified Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="latitude"><span>Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longitude"><span>Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in vm.entries track by entry.id">
+                    <td><a ui-sref="entry-detail({id:entry.id})">{{entry.id}}</a></td>
+                    <td>{{entry.address}}</td>
+                    <td>{{entry.city}}</td>
+                    <td>{{entry.country}}</td>
+                    <td>{{entry.postal_code}}</td>
+                    <td>{{entry.state_province}}</td>
+                    <td>{{entry.country1}}</td>
+                    <td>{{entry.google_verified_address}}</td>
+                    <td>{{entry.latitude}}</td>
+                    <td>{{entry.longitude}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="entry-detail({id:entry.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="entry.edit({id:entry.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="entry.delete({id:entry.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

@@ -1,0 +1,46 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postal_code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state_province",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "google_verified_address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160816123925",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "entry",
+    "pagination": "pager"
+}

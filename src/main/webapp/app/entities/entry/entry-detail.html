@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span>Entry</span> {{vm.entry.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{vm.entry.address}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+            <span>{{vm.entry.city}}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+            <span>{{vm.entry.country}}</span>
+        </dd>
+        <dt><span translate="adobeLatLangApp.entry.postal_code">Postal Code</span></dt>
+        <dd>
+            <span>{{vm.entry.postal_code}}</span>
+        </dd>
+        <dt><span translate="adobeLatLangApp.entry.state_province">State Province</span></dt>
+        <dd>
+            <span>{{vm.entry.state_province}}</span>
+        </dd>
+        <dt><span>Country 1</span></dt>
+        <dd>
+            <span>{{vm.entry.country1}}</span>
+        </dd>
+        <dt><span translate="adobeLatLangApp.entry.google_verified_address">Google Verified Address</span></dt>
+        <dd>
+            <span>{{vm.entry.google_verified_address}}</span>
+        </dd>
+        <dt><span>Latitude</span></dt>
+        <dd>
+            <span>{{vm.entry.latitude}}</span>
+        </dd>
+        <dt><span>Longitude</span></dt>
+        <dd>
+            <span>{{vm.entry.longitude}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="entry-detail.edit({id:vm.entry.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

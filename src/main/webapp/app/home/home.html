@@ -1,0 +1,39 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-4">
+            <span class="hipster img-responsive img-rounded"></span>
+        </div>
+        <div class="col-md-8">
+            <h1>Welcome to Adobe LatLang</h1>
+            <p class="lead">This app will update spredsheets with Latitude Longitude info.</p>
+
+            <div ng-switch="vm.isAuthenticated()">
+                <div class="alert alert-success" ng-switch-when="true">
+                    You are logged in as user "{{vm.account.login}}".
+                </div>
+
+                <div class="alert alert-warning" ng-switch-when="false">
+                    Please <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, to perform actions on your spreadsheet.
+                </div>
+
+                <div class="alert alert-warning" ng-switch-when="false">
+                    You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
+                </div>
+            </div>
+
+            <p>
+                Following actions can be performed on spreadsheets
+            </p>
+
+            <ul>
+                <li>Update a google spread sheet with latitude and longitute info</li>
+                <li>Upload a spredsheet and get its updated records with latlang info.</li>
+                <li>Sample spread sheet can be found <a href="https://docs.google.com/spreadsheets/d/1DbCq0m9jS4H9bCu24anbPG-i7jBqD_V5u6YjLfyuRl4/edit#gid=0" target="_blank">here</a></li>
+            </ul>
+
+            <p>
+             <span>Code can be found here on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank">Github</a>!
+            </p>
+        </div>
+    </div>
+</div>
