@@ -1,6 +1,8 @@
 package com.tomar.app.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
 import com.tomar.app.domain.Entry;
 import com.tomar.app.service.EntryService;
 import com.tomar.app.service.impl.FileReadService;
@@ -14,15 +16,24 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
@@ -108,11 +119,42 @@ public class EntryResource {
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, 
-    		value = "/upload", 
-    		consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<List<Entry>> handleFileUpload(@RequestParam("file") MultipartFile file) {
+//    @POST
+//	@Path("/upload")
+//	//@Consumes(MediaType.MULTIPART_FORM_DATA_VALUE)
+//	public Response uploadFile(
+//		//@FormDataParam("file") InputStream uploadedInputStream,
+//		//@FormDataParam("file") FormDataContentDisposition fileDetail
+//			) throws IOException {
+//    	InputStream uploadedInputStream = null;
+//		List<Entry> res = new ArrayList<Entry>();
+//		if (uploadedInputStream != null) {
+//			try {
+//				  res = FileReadService.getUpdatedData(uploadedInputStream);
+//			} catch (RuntimeException e) {
+//				//redirectAttributes.addFlashAttribute("message", "Failued to upload " + file.getOriginalFilename() + " => " + e.getMessage());
+//			}
+//		} else {
+//			//redirectAttributes.addFlashAttribute("message", "Failed to upload " + file.getOriginalFilename() + " because it was empty");
+//		}
+//
+//
+//		return Response.status(200).entity(res).build();
+//
+//	}
+    
+    
+    @RequestMapping(value = "/upload",
+    		method = RequestMethod.POST,
+    		consumes = "multipart/form-data",
+    		produces = { "application/json", "application/xml" }
+    		)
+	public ResponseEntity<List<Entry>> handleFileUpload(HttpServletRequest request,
+            @PathVariable("domain") String domainParam,
+            @RequestParam(value = "type") String thingTypeParam,
+            @RequestBody MultipartFile[] submissions) {
 		List<Entry> res = new ArrayList<Entry>();
+		MultipartFile file = submissions[0];
 		if (!file.isEmpty()) {
 			try {
 				//Files.copy(file.getInputStream(), Paths.get(ROOT, file.getOriginalFilename()));
@@ -128,6 +170,23 @@ public class EntryResource {
 
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
+    
+    @InitBinder
+    public void initBinder(ServletRequestDataBinder binder) {
+        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+    }
+
+    public class FileUpload implements Serializable {
+        private MultipartFile file;
+
+        public MultipartFile getFile() {
+            return file;
+        }
+
+        public void setFile(MultipartFile myFile) {
+            this.file = myFile;
+        }
+    }
 
     /**
      * GET  /entries : get all the entries.

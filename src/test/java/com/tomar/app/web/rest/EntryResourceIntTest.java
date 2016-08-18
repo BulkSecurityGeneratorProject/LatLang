@@ -164,6 +164,18 @@ public class EntryResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
       }
+    
+    @Test
+    @Transactional
+    public void getEntryUrl1() throws Exception {
+        // Initialize the database
+      //  entryRepository.saveAndFlush(entry);
+
+        // Get the entry
+        restEntryMockMvc.perform(post("/api/upload"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+      }
 
 
     @Test

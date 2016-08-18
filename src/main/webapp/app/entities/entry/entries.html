@@ -24,7 +24,20 @@
     <div class="row">
     <div class="container-fluid">
     
-	<input type="file" ng-nodel="vm.myFile">
+    <form>
+                <div class="form-group">
+                    <label for="myFileField">Select a file: </label>
+                    <input type="file" demo-file-model="vm.myFile"  class="form-control" id ="myFileField"/>
+                </div>
+                <button class="btn btn-primary" ng-click="vm.processUpload()" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Process
+                    </span>
+                </button>
+            </form>
+    
+	<!-- <input type="file" ng-nodel="vm.myFile">
     <br>
     	<div class="col-xs-3 no-padding-right">
                 <button class="btn btn-primary" ng-click="vm.processUpload()" >
@@ -33,7 +46,7 @@
                         Process
                     </span>
                 </button>
-           </div>
+           </div> -->
          </div>
         </div>
     <br/>

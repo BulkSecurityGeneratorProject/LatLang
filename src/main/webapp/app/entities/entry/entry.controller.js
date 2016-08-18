@@ -64,7 +64,7 @@
         function processUrl () {
         	var values = vm.urlFull.split('/');
         	vm.url = values[5];
-            Entry1.update({url: vm.url},onSuccess, onerror
+            Entry1.update({url: vm.url},onSuccess, onError
             );
             
             function onSuccess() {
@@ -75,6 +75,18 @@
         }
         
         function processUpload () {
+            Entry2.save({file: vm.myFile},onSuccess, onError
+            );
+            
+            function onSuccess() {
+            	loadAll();
+            }
+            function onError() {
+            }
+        }
+        
+        function uploadFile() {
+            var file = vm.myFile;
             Entry2.get({file: vm.myFile},onSuccess, onerror
             );
             
@@ -85,16 +97,5 @@
             }
         }
         
-        function proc (files) {
-            var fd = new FormData();
-            fd.append("file", files[0]);
-            Entry2.get({file: vm.myFile},onSuccess, onerror
-            );
-            function onSuccess() {
-            	loadAll();
-            }
-            function onError() {
-            }
-        };
     }
 })();

@@ -1,25 +1,33 @@
 package com.tomar.app;
 
-import com.tomar.app.config.Constants;
-import com.tomar.app.config.DefaultProfileUtil;
-import com.tomar.app.config.JHipsterProperties;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.*;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.Environment;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.servlet.MultipartConfigElement;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.MultipartFilter;
+
+import com.tomar.app.config.Constants;
+import com.tomar.app.config.DefaultProfileUtil;
+import com.tomar.app.config.JHipsterProperties;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
@@ -30,6 +38,18 @@ public class AdobeLatLangApp {
 
     @Inject
     private Environment env;
+    
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        return new MultipartConfigElement("");
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() {
+        org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(1000000);
+        return multipartResolver;
+    }
 
     /**
      * Initializes AdobeLatLang.

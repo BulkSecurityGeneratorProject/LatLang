@@ -40,7 +40,11 @@
         var resourceUrl =  'api/upload';
 
         return $resource(resourceUrl, {}, {
-        	'get': { method:'POST' }
+        	'save': { method:'POST',
+        		headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+        		}
         });
     }
 })();
