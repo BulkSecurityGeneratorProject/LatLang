@@ -18,21 +18,24 @@ spring:
         livereload:
             enabled: false
     datasource:
-        url: jdbc:h2:mem:adobelatlang;DB_CLOSE_DELAY=-1
-        name:
-        username: AdobeLatLang
-        password:
-    h2:
-        console:
-            enabled: false
+        url: jdbc:postgres://bhwrqdgrfhetao:cQ929_F5R5yBc_VbRJvqE37y_-@ec2-54-225-81-90.compute-1.amazonaws.com:5432/d7uiqpe5q74350
+        name: d7uiqpe5q74350
+        username: bhwrqdgrfhetao
+        password: cQ929_F5R5yBc_VbRJvqE37y_-
+        hikari:
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
     jpa:
-        database-platform: com.tomar.app.domain.util.FixedH2Dialect
-        database: H2
-        show-sql: true
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        database: Postgres
+        show-sql: false
         properties:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
+            hibernate.generate_statistics: false
     mail:
         host: localhost
         port: 25
@@ -42,7 +45,7 @@ spring:
         cache: true
 
 liquibase:
-    contexts: dev
+    contexts: prod
 
 server:
     port: 8080
