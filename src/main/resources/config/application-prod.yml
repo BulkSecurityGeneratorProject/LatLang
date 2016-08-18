@@ -18,24 +18,21 @@ spring:
         livereload:
             enabled: false
     datasource:
-        url: jdbc:mysql://localhost:3306/AdobeLatLang?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:h2:mem:adobelatlang;DB_CLOSE_DELAY=-1
         name:
-        username: root
+        username: AdobeLatLang
         password:
-        hikari:
-            data-source-properties:
-                cachePrepStmts: true
-                prepStmtCacheSize: 250
-                prepStmtCacheSqlLimit: 2048
-                useServerPrepStmts: true
+    h2:
+        console:
+            enabled: false
     jpa:
-        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-        database: MYSQL
-        show-sql: false
+        database-platform: com.tomar.app.domain.util.FixedH2Dialect
+        database: H2
+        show-sql: true
         properties:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: false
+            hibernate.generate_statistics: true
     mail:
         host: localhost
         port: 25
@@ -45,7 +42,7 @@ spring:
         cache: true
 
 liquibase:
-    contexts: prod
+    contexts: dev
 
 server:
     port: 8080
